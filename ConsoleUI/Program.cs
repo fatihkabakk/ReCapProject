@@ -14,44 +14,53 @@ namespace ConsoleUI
             ICarService carManager = new CarManager(new InMemoryCarDal());
             Console.WriteLine("***************First Part***************");
 
-            List<Car> cars1 = carManager.GetById(2);
-            PrintCarInfo(cars1);
-            carManager.Delete(cars1[0]);
-            List<Car> cars2 = carManager.GetById(2);
-            Console.WriteLine("Liste boyutu: " + cars2.ToArray().Length);
-            PrintCarInfo(cars2);
+            Car car1 = carManager.GetById(2);
+            PrintCarInfo(car1);
+            carManager.Delete(car1);
+            Car car2 = carManager.GetById(2);
+            if (car2 != null)
+            {
+                Console.WriteLine("Silme Testi Başarısız");
+            }
+            else
+            {
+                Console.WriteLine("Silme Testi Başarılı");
+            }
+            //car2 = null
+            //PrintCarInfo(car2); <-- Throws An Exception
 
 
             Console.WriteLine("\n***************Second Part***************");
             List<Car> allCars = carManager.GetAll();
-            PrintCarInfo(allCars);
+            foreach (var car in allCars)
+            {
+                PrintCarInfo(car);
+            }
+            
 
 
             Console.WriteLine("\n***************Third Part***************");
             Car newCar = new Car { CarId = 6, BrandId = 5, ColorId = 2, ModelYear = 2016, DailyPrice = 400, Description = "BMW 3.20i 1.6 Benzinli" };
             carManager.Add(newCar);
-            List<Car> cars3 = carManager.GetById(6);
-            PrintCarInfo(cars3);
+            Car car3 = carManager.GetById(6);
+            PrintCarInfo(car3);
 
 
             Console.WriteLine("\n***************Fourth Part***************");
-            Car carToUpdate = carManager.GetById(5)[0];
-            Console.WriteLine("Güncellenmemiş Fiyat: " + carToUpdate.DailyPrice);
+            Car carToUpdate = carManager.GetById(5);
+            Console.WriteLine("Araç: " + carToUpdate.Description + "\nEski Fiyat: " + carToUpdate.DailyPrice);
             Car toUpdate = new Car{ CarId = 5, BrandId = 4, ColorId = 4, ModelYear = 2017, DailyPrice = 370, Description = "Audi A3 Sportback 1.6 Dizel"};
             carManager.Update(toUpdate);
-            Car carAfterUpdate = carManager.GetById(5)[0];
-            Console.WriteLine("Güncellenmiş Fiyat: " + carAfterUpdate.DailyPrice);
+            Car carAfterUpdate = carManager.GetById(5);
+            Console.WriteLine("Güncel Fiyat: " + carAfterUpdate.DailyPrice);
 
             Console.ReadKey();
         }
 
-        private static void PrintCarInfo(List<Car> cars)
+        private static void PrintCarInfo(Car car)
         {
-            foreach (Car car in cars)
-            {
-                Console.WriteLine("Car Id: " + car.CarId + "\nBrand Id: " + car.BrandId + "\nColor Id: " + car.ColorId + "\nModel Year: " + car.ModelYear + "\nDaily Price: " + car.DailyPrice + "\nDescription: " + car.Description);
-                Console.WriteLine("****************************************");
-            }
+            Console.WriteLine("Car Id: " + car.CarId + "\nBrand Id: " + car.BrandId + "\nColor Id: " + car.ColorId + "\nModel Year: " + car.ModelYear + "\nDaily Price: " + car.DailyPrice + "\nDescription: " + car.Description);
+            Console.WriteLine("****************************************");
         }
     }
 }
