@@ -3,6 +3,7 @@ using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 
@@ -12,8 +13,68 @@ namespace ConsoleUI
     {
         static void Main()
         {
+            //Creates Manager Instances
             ICarService carManager = new CarManager(new EfCarDal());
+            IColorService colorManager = new ColorManager(new EfColorDal());
+            IBrandService brandManager = new BrandManager(new EfBrandDal());
 
+
+            Console.WriteLine("********** Classic carManager -- GetAll **********");
+            foreach (Car car in carManager.GetAll())
+            {
+                Console.WriteLine("Car Id: {0} -- Brand Id: {1} -- Color Id: {2} -- Daily Price: {3} -- Description: {4}", car.CarId, car.BrandId, car.ColorId, car.DailyPrice, car.Description);
+            }
+
+            //Color Change Test
+            //colorManager.Update(new Color { ColorId = 3, ColorName = "Kırmızı" });
+
+            List<CarDetailDto> carDetailDtos = carManager.GetCarDetails();
+            Console.WriteLine("\n********** New carDetailDto -- GetCarDetails **********");
+            foreach (CarDetailDto carDetailDto in carDetailDtos)
+            {
+                Console.WriteLine("Araç: {0} -- Marka: {1} -- Renk: {2} -- Günlük Fiyatı: {3} TL", carDetailDto.CarName, carDetailDto.BrandName.Trim(), carDetailDto.ColorName.Trim(), carDetailDto.DailyPrice);
+            }
+
+            //This Is For Testing The GetByBrandId And GetByColorId Methods.
+            //ColorBrandIdTest(carManager);
+
+            //This Is For Testing The Add Rules.
+            //AddRulesTest(carManager);
+
+            //Creates The Database Objects -- Just Run Once.
+            //DbAddTest(carManager);
+
+            //Creates Database Brands And Colors -- Just Run Once.
+            //InsertBrandsAndColors(colorManager, brandManager);
+
+            //FirstTest(carManager);
+
+            //SecondTest(carManager);
+
+            //ThirdTest(carManager);
+
+            //FourthTest(carManager);
+
+            Console.ReadKey();
+        }
+
+        private static void InsertBrandsAndColors(IColorService colorManager, IBrandService brandManager)
+        {
+            //Inserts Brands And Colors Into Database
+
+            brandManager.Add(new Brand { BrandName = "Opel" });
+            brandManager.Add(new Brand { BrandName = "Renault" });
+            brandManager.Add(new Brand { BrandName = "Dacia" });
+            brandManager.Add(new Brand { BrandName = "Audi" });
+
+            colorManager.Add(new Color { ColorName = "Gri" });
+            colorManager.Add(new Color { ColorName = "Beyaz" });
+            colorManager.Add(new Color { ColorName = "Kırmızı" });
+            colorManager.Add(new Color { ColorName = "Siyah" });
+        }
+
+        private static void ColorBrandIdTest(ICarService carManager)
+        {
             List<Car> carsByBrand = carManager.GetCarsByBrandId(1);
 
             foreach (Car car in carsByBrand)
@@ -27,22 +88,6 @@ namespace ConsoleUI
             {
                 PrintCarInfo(car);
             }
-
-            //This Is For Testing The Add Rules.
-            //AddRulesTest(carManager);
-
-            //Creates The Database Objects -- Just Run Once.
-            //DbAddTest(carManager);
-
-            //FirstTest(carManager);
-
-            //SecondTest(carManager);
-
-            //ThirdTest(carManager);
-
-            //FourthTest(carManager);
-
-            Console.ReadKey();
         }
 
         private static void AddRulesTest(ICarService carManager)
