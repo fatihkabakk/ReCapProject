@@ -17,6 +17,7 @@ namespace Business.Constants
         public static string CarDetailsInvalid = "Araç Fiyatı 0' dan Büyük ve Açıklaması En Az 2 Karakter Olmalıdır";
         public static string CarDetailsListed = "Araç Detayları Listelendi";
         public static string CarListed = "Araç Listelendi";
+        public static string CarNotFound = "Araç Sistemde Mevcut Değil";
         public static string CarsListed = "Araçlar Listelendi";
         public static string CarUpdated = "Araç Bilgileri Güncellendi";
         public static string ColorAdded = "Renk Sisteme Eklendi";
