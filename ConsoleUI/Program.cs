@@ -18,22 +18,29 @@ namespace ConsoleUI
             IColorService colorManager = new ColorManager(new EfColorDal());
             IBrandService brandManager = new BrandManager(new EfBrandDal());
 
-
             Console.WriteLine("********** Classic carManager -- GetAll **********");
-            foreach (Car car in carManager.GetAll())
+            var result1 = carManager.GetAll();
+            if (result1.Success)
             {
-                Console.WriteLine("Car Id: {0} -- Brand Id: {1} -- Color Id: {2} -- Daily Price: {3} -- Description: {4}", car.CarId, car.BrandId, car.ColorId, car.DailyPrice, car.Description);
+                foreach (Car car in result1.Data)
+                {
+                    Console.WriteLine("Car Id: {0} -- Brand Id: {1} -- Color Id: {2} -- Daily Price: {3} -- Description: {4}", car.CarId, car.BrandId, car.ColorId, car.DailyPrice, car.Description);
+                }
             }
 
             //Color Change Test
             //colorManager.Update(new Color { ColorId = 3, ColorName = "Kırmızı" });
 
-            List<CarDetailDto> carDetailDtos = carManager.GetCarDetails();
             Console.WriteLine("\n********** New carDetailDto -- GetCarDetails **********");
-            foreach (CarDetailDto carDetailDto in carDetailDtos)
+            var result2 = carManager.GetCarDetails();
+            if (result2.Success)
             {
-                Console.WriteLine("Araç: {0} -- Marka: {1} -- Renk: {2} -- Günlük Fiyatı: {3} TL", carDetailDto.CarName, carDetailDto.BrandName.Trim(), carDetailDto.ColorName.Trim(), carDetailDto.DailyPrice);
+                foreach (CarDetailDto carDetailDto in result2.Data)
+                {
+                    Console.WriteLine("Araç: {0} -- Marka: {1} -- Renk: {2} -- Günlük Fiyatı: {3} TL", carDetailDto.CarName, carDetailDto.BrandName.Trim(), carDetailDto.ColorName.Trim(), carDetailDto.DailyPrice);
+                }
             }
+            
 
             //This Is For Testing The GetByBrandId And GetByColorId Methods.
             //ColorBrandIdTest(carManager);
@@ -75,14 +82,14 @@ namespace ConsoleUI
 
         private static void ColorBrandIdTest(ICarService carManager)
         {
-            List<Car> carsByBrand = carManager.GetCarsByBrandId(1);
+            List<Car> carsByBrand = carManager.GetCarsByBrandId(1).Data;
 
             foreach (Car car in carsByBrand)
             {
                 PrintCarInfo(car);
             }
 
-            List<Car> carsByColor = carManager.GetCarsByColorId(4);
+            List<Car> carsByColor = carManager.GetCarsByColorId(4).Data;
 
             foreach (Car car in carsByColor)
             {
@@ -118,11 +125,11 @@ namespace ConsoleUI
         private static void FourthTest(ICarService carManager)
         {
             Console.WriteLine("\n***************Fourth Part***************");
-            Car carToUpdate = carManager.GetById(5);
+            Car carToUpdate = carManager.GetById(5).Data;
             Console.WriteLine("Araç: " + carToUpdate.Description + "\nEski Fiyat: " + carToUpdate.DailyPrice);
             Car toUpdate = new Car { BrandId = 4, ColorId = 4, ModelYear = 2017, DailyPrice = 370, Description = "Audi A3 Sportback 1.6 Dizel" };
             carManager.Update(toUpdate);
-            Car carAfterUpdate = carManager.GetById(5);
+            Car carAfterUpdate = carManager.GetById(5).Data;
             Console.WriteLine("Güncel Fiyat: " + carAfterUpdate.DailyPrice);
         }
 
@@ -131,14 +138,14 @@ namespace ConsoleUI
             Console.WriteLine("\n***************Third Part***************");
             Car newCar = new Car { BrandId = 5, ColorId = 2, ModelYear = 2016, DailyPrice = 400, Description = "BMW 3.20i 1.6 Benzinli" };
             carManager.Add(newCar);
-            Car car3 = carManager.GetById(6);
+            Car car3 = carManager.GetById(6).Data;
             PrintCarInfo(car3);
         }
 
         private static void SecondTest(ICarService carManager)
         {
             Console.WriteLine("\n***************Second Part***************");
-            List<Car> allCars = carManager.GetAll();
+            List<Car> allCars = carManager.GetAll().Data;
             foreach (var car in allCars)
             {
                 PrintCarInfo(car);
@@ -149,10 +156,10 @@ namespace ConsoleUI
         {
             Console.WriteLine("***************First Part***************");
 
-            Car car1 = carManager.GetById(2);
+            Car car1 = carManager.GetById(2).Data;
             PrintCarInfo(car1);
             carManager.Delete(car1);
-            Car car2 = carManager.GetById(2);
+            Car car2 = carManager.GetById(2).Data;
             if (car2 != null)
             {
                 Console.WriteLine("Silme Testi Başarısız");
