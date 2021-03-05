@@ -13,6 +13,16 @@ namespace ConsoleUI
     {
         static void Main()
         {
+            //Guid Testing -- In Case I Forget This Here :D
+            Guid guid = Guid.NewGuid();
+            Console.WriteLine(guid);
+            Console.WriteLine(guid.GetType());
+
+
+            var guid_string = guid.ToString("N");
+            Console.WriteLine(guid_string);
+            Console.WriteLine(guid_string.GetType());
+
             //Creates Manager Instances
             ICarService carManager = new CarManager(new EfCarDal());
             IColorService colorManager = new ColorManager(new EfColorDal());
@@ -24,7 +34,7 @@ namespace ConsoleUI
             {
                 foreach (Car car in result1.Data)
                 {
-                    Console.WriteLine("Car Id: {0} -- Brand Id: {1} -- Color Id: {2} -- Daily Price: {3} -- Description: {4}", car.CarId, car.BrandId, car.ColorId, car.DailyPrice, car.Description);
+                    Console.WriteLine("Car Id: {0} -- Brand Id: {1} -- Color Id: {2} -- Daily Price: {3} -- Model Year: {4} -- Description: {5}", car.CarId, car.BrandId, car.ColorId, car.DailyPrice, car.ModelYear, car.Description);
                 }
             }
 
@@ -37,7 +47,7 @@ namespace ConsoleUI
             {
                 foreach (CarDetailDto carDetailDto in result2.Data)
                 {
-                    Console.WriteLine("Araç: {0} -- Marka: {1} -- Renk: {2} -- Günlük Fiyatı: {3} TL", carDetailDto.CarName, carDetailDto.BrandName.Trim(), carDetailDto.ColorName.Trim(), carDetailDto.DailyPrice);
+                    Console.WriteLine("Araç: {0} -- Marka: {1} -- Model Yılı: {2} -- Renk: {3} -- Günlük Fiyatı: {4} TL", carDetailDto.CarName, carDetailDto.BrandName.Trim(), carDetailDto.ModelYear, carDetailDto.ColorName.Trim(), carDetailDto.DailyPrice);
                 }
             }
             

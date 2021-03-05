@@ -16,6 +16,11 @@ namespace Business.Constants
         public static string CarDeleted = "Araç Sistemden Silindi";  
         public static string CarDetailsInvalid = "Araç Fiyatı 0' dan Büyük ve Açıklaması En Az 2 Karakter Olmalıdır";
         public static string CarDetailsListed = "Araç Detayları Listelendi";
+        public static string CarImageAdded = "Araç Fotoğrafı Sisteme Eklendi";
+        public static string CarImageDeleted = "Araç Fotoğrafı Sistemden Silindi";
+        public static string CarImageDetailsInvalid = "Araç Fotoğrafı Boş Olmamalıdır";
+        public static string CarImageLimitExceeded = "Her Araç En Fazla 5 Fotoğrafa Sahip Olabilir";
+        public static string CarImageUpdated = "Araç Fotoğrafı Güncellendi";
         public static string CarListed = "Araç Listelendi";
         public static string CarNotFound = "Araç Sistemde Mevcut Değil";
         public static string CarsListed = "Araçlar Listelendi";
@@ -43,6 +48,6 @@ namespace Business.Constants
         public static string UserDetailsInvalid = "Kullanıcı Adı Ve Soyadı En Az 2 Karakter Ve Şifresi En Az 8 Haneli Olmalıdır";
         public static string UserListed = "Kullanıcı Listelendi";
         public static string UsersListed = "Kullanıcılar Listelendi";
-        public static string UserUpdated = "Kullanıcı Bilgileri Güncellendi";
+        public static string UserUpdated = "Kullanıcı Bilgileri Güncellendi"; 
     }
 }
