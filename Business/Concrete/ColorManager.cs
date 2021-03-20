@@ -5,9 +5,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -29,7 +27,7 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.ColorAdded);
             }
             return new ErrorResult(Messages.ColorDetailsInvalid);
-            
+
         }
 
         public IResult Delete(Color color)

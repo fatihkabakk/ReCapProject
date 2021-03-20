@@ -5,9 +5,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -44,7 +42,7 @@ namespace Business.Concrete
 
         public IDataResult<Customer> GetById(int customerId)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.UserId == customerId), Messages.CustomerListed);
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == customerId), Messages.CustomerListed);
         }
 
         public IResult Update(Customer customer)

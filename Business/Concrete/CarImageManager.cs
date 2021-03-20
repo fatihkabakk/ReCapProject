@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -52,7 +51,7 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetById(int carImageId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(ci=>ci.Id == carImageId));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(ci => ci.Id == carImageId));
         }
 
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId)

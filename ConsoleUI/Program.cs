@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -50,7 +49,7 @@ namespace ConsoleUI
                     Console.WriteLine("Araç: {0} -- Marka: {1} -- Model Yılı: {2} -- Renk: {3} -- Günlük Fiyatı: {4} TL", carDetailDto.CarName, carDetailDto.BrandName.Trim(), carDetailDto.ModelYear, carDetailDto.ColorName.Trim(), carDetailDto.DailyPrice);
                 }
             }
-            
+
 
             //This Is For Testing The GetByBrandId And GetByColorId Methods.
             //ColorBrandIdTest(carManager);

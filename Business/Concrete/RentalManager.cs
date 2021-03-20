@@ -4,11 +4,8 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -27,7 +24,7 @@ namespace Business.Concrete
             List<Rental> rentalsToCheck = _rentalDal.GetAll(r => r.Id == rental.Id);
             foreach (Rental rentalObject in rentalsToCheck)
             {
-                if (rentalObject.ReturnDate==null)
+                if (rentalObject.ReturnDate == null)
                 {
                     return new ErrorResult(Messages.RentalCarUnavailable);
                 }
@@ -49,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int rentalId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r=>r.Id == rentalId), Messages.RentalListed);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == rentalId), Messages.RentalListed);
         }
 
         public IResult Update(Rental rental)
