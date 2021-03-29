@@ -43,6 +43,8 @@ namespace Business.Concrete
             return null;
         }
 
+        [SecuredOperation("car.delete,admin")]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
@@ -66,21 +68,26 @@ namespace Business.Concrete
             return new ErrorDataResult<Car>(Messages.CarNotFound);
         }
 
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarDetailsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), Messages.CarsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), Messages.CarsListed);
         }
 
+        [ValidationAspect(typeof(CarValidator))]
+        [SecuredOperation("car.update,admin")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {

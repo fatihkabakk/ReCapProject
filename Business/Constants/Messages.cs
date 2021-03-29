@@ -40,6 +40,7 @@
         public static string RentalDeleted = "Kiralama Bilgisi Sistemden Silindi";
         public static string RentalCarUnavailable = "Araç Kiralanmadan Önce Teslim Edilmelidir";
         public static string RentalListed = "Kiralama Bilgisi Listelendi";
+        public static string RentalDetailsListed = "Kiralama Detayları Listelendi";
         public static string RentalsListed = "Kiralama Bilgileri Listelendi";
         public static string RentalUpdated = "Kiralama Bilgisi Güncellendi";
         public static string SuccessfulLogin = "Giriş Başarılı";
